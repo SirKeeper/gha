@@ -4,9 +4,9 @@ on:
   # Se ejecuta manualmente desde la pestaña Actions
   workflow_dispatch:
   
-  # También en cada push a main
+  # También en cada push a master
   push:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:
   hello-world-job:
