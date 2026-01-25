@@ -1,0 +1,42 @@
+name: Hello World - Self Hosted Runner
+
+on:
+  # Se ejecuta manualmente desde la pestaña Actions
+  workflow_dispatch:
+  
+  # También en cada push a main
+  push:
+    branches: [ main ]
+
+jobs:
+  hello-world-job:
+    # Aquí especificamos que use nuestro self-hosted runner
+    runs-on: self-hosted
+    
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Saludo desde el runner
+        run: |
+          echo "🎉 ¡Hola Mundo desde mi self-hosted runner!"
+          echo "=========================================="
+          echo "🏃 Runner ejecutándose en: $(hostname)"
+          echo "🖥️  Sistema operativo: $(uname -a)"
+          echo "📁 Directorio de trabajo: $(pwd)"
+          echo "👤 Usuario: $(whoami)"
+          echo "💻 Arquitectura: $(uname -m)"
+      
+      - name: Información del entorno
+        run: |
+          echo "=========================================="
+          echo "🔧 Información del entorno:"
+          echo "Node version: $(node --version 2>/dev/null || echo 'No instalado')"
+          echo "Python version: $(python3 --version 2>/dev/null || echo 'No instalado')"
+          echo "Git version: $(git --version)"
+          echo "=========================================="
+      
+      - name: Listar archivos del repositorio
+        run: |
+          echo "📂 Archivos en el repositorio:"
+          ls -la
